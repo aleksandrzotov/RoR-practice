@@ -68,12 +68,6 @@
         a:hover {
             text-decoration: underline;
         }
-
-        .message {
-            text-align: center;
-            font-size: 18px;
-            margin-top: 20px;
-        }
     </style>
 
 <body>
@@ -88,9 +82,6 @@
                 <input type="submit" value="Отправить">
             </div>
         </form>
-        <?php if($message): ?>
-        <div class="message"><?= $message; ?></div>
-        <?php endif; ?>
         <p>Вспомнили пароль? <a href="/login">Войти</a></p>
     </div>
 </body>
