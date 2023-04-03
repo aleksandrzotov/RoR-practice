@@ -1,5 +1,5 @@
-class AutorizationController < ActionController::Base
-    
+class AutorizationController < ApplicationController
+
     def create
     end
 end
