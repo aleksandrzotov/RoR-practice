@@ -1,46 +1,7 @@
-<style>
-  h1 {
-    font-size: 48px;
-    font-weight: bold;
-    margin-bottom: 30px;
-    color: #333;
-    text-align: center;
-  }
-  
-  .post-text {
-    font-size: 22px;
-    line-height: 30px;
-    margin-bottom: 10px;
-    color: #333;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    background-color: #f9f9f9;
-  }
-  
-  .btn-info {
-    margin-left: 40%;
-    margin-right: 40%;
-    display: block;
-    color: #fff !important;
-    background-color: #17a2b8 !important;
-    border-color: #17a2b8 !important;
-    font-size: 18px;
-    padding: 5px 00px;
-    border-radius: 50px;
-    letter-spacing: 1px;
-  }
-
-  .mb-2 {
-    text-align: center;
-  }
-
-</style>
-
-<h1>Post</h1>
-
+<h1 class="text-center fs-1">Post</h1>
 <div class="post-text">
   <%= @posts.text.html_safe %>
 </div>
-
-<%= link_to "View all posts", posts_path, class: 'btn btn-info mb-2' %>
+<div class="text-center">
+<%= link_to "View all posts", posts_path, class: 'btn btn-success' %>
+</div>
