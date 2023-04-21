@@ -1,4 +1,10 @@
-
+<% if current_user %>
+  <%= "Logged in as #{current_user.email}" %>
+  <%= link_to "Personal Area", current_user %>
+  <%= link_to "Logout", logout_path, method: :delete, class: "btn btn-success" %>
+<% else %>
+  <%= link_to "Login", login_path, class: "btn btn-success" %>
+<% end %>
 <h1 class="text-center fs-1">Posts</h1>
 <div class="row">
   <% @posts.each do |post| %>
@@ -6,7 +12,11 @@
       <div class="card">
         <div class="card-body">
           <p class="card-text"><%= post.text.truncate(120) %></p>
-          <%= link_to "Read more", post, class: "btn btn-success" %>
+          <%= link_to "Read more", post, class: "btn btn-primary" %>
+          <% if current_user %>
+            <%= link_to "Like", post.like, class: "btn btn-success" %>
+            <%= link_to "Dislike", post.dislike, class: "btn btn-danger" %>
+          <% end %>
         </div>
       </div>
     </div>
