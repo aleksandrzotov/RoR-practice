@@ -9,7 +9,9 @@ users = 3.times.map do |i|
 end
 
 users.map do |user|
-  Post.create(
-    text: Faker::Food.description,
-    user: user)
+  3.times.map do |i|
+    Post.create(
+      text: Faker::Food.description,
+      user: user)
+  end
 end
