@@ -3,7 +3,9 @@ class RecoveryPasswordController < ApplicationController
     end
 
     def create
-        MailWorker.perform_async(params[:recovery_password][:email])
+        email = params[:recovery_password][:email]
+        user = User.find_by(email: email)
+        MailWorker.perform_async(email, user.id)
         redirect_to root_path
     end
 
