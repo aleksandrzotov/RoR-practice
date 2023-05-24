@@ -1,6 +1,7 @@
 services:
   web:
     build: .
+    image: ror:latest
     ports:
       - 9000:9000
     volumes:
@@ -12,9 +13,18 @@ services:
       DB_PASSWORD: postgres
     depends_on:
       - postgres
+      - redis
     stdin_open: true
     tty: true
-    command: bash -c “rm -f tmp/pids/server.pid && bin/rails s -p 3000 -b ‘0.0.0.0’”
+    command: bash -c "rm -f tmp/pids/server.pid && bin/rails s -p 9000 -b '0.0.0.0'"
+
+  sidekiq:
+    image: ror:latest
+    command: bundle exec sidekiq
+    volumes:
+      - .:/usr/src/app
+    depends_on:
+      - redis
 
   postgres:
     image: postgres:14
@@ -26,6 +36,11 @@ services:
       POSTGRES_PASSWORD: postgres
     ports:
       - 5436:5432
+
+  redis:
+    image: redis:6
+    ports:
+      - 6380:6379
 
 volumes:
   postgres:

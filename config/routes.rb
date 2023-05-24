@@ -11,6 +11,8 @@ Rails.application.routes.draw do
 
   get 'login', to: 'sessions#new', as: :login
 	post 'login', to: 'sessions#create'
+  get 'recovery_password', to: 'recovery_password#new', as: :recovery_password
+  post 'recovery_password', to: 'recovery_password#create'
 	delete 'logout', to: 'sessions#destroy'
   post 'api/auth', to: 'api/auth#login'
 end
