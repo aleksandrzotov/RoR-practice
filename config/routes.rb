@@ -2,7 +2,6 @@ Rails.application.routes.draw do
   root to: 'posts#index'
 
   resources :posts, :users
-
   namespace :api do
     namespace :v1 do
       resources :posts
