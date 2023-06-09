@@ -1,11 +1,8 @@
 class UsersController < ApplicationController
 
     def edit
-      token = params[:token]
-      @user_id = params[:id]
-      user = User.find(@user_id)
-
-      @is_valid_token = token == user.reset_password_token && user.reset_password_sent_at > Time.now - 12 * 60 * 60
+      @user = User.find(params[:id])
+      @token = params[:token]
     end
 
     def index
@@ -24,19 +21,18 @@ class UsersController < ApplicationController
 
     @user.email.downcase!
 
-    if @user.save
-      flash[:notice] = "Account created successfully!"
-      redirect_to root_path
-    else
-      flash.now.alert = "Oops, couldn't create account. Please make sure you are using a valid email and password and try again."
-      render :new
-    end
+    @user.save
+    redirect_to root_path
   end
 
   def update
     user = User.find(params[:id])
-    user.update(password: params[:password])
-    redirect_to root_path
+    if params[:token] == user.reset_password_token && user.reset_password_sent_at > Time.now - 12.hours
+      user.update(password: params[:password])
+      redirect_to root_path
+    else
+      redirect_to :recovery_password
+    end
   end
 
 private
