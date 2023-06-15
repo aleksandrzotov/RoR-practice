@@ -28,9 +28,13 @@ class UsersController < ApplicationController
   def update
     user = User.find(params[:id])
     if params[:token] == user.reset_password_token && user.reset_password_sent_at > Time.now - 12.hours
-      user.update(password: params[:password])
+      result = user.update(password: params[:password])
+      if !result
+        flash.notice = "can not update password"
+      end
       redirect_to root_path
     else
+      flash.notice = "token invalid"
       redirect_to :recovery_password
     end
   end
