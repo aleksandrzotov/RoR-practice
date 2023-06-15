@@ -1,9 +1,13 @@
 <div class="login-container">
-    <h1 class="text-center fs-3">Restoring password</h1>
-        <form action="" method="POST">
-            <label for="inputPassword" class="col-form-label">New password:</label>
-            <input type="password" class="form-control" id="inputPassword" required>
-            <button class="btn btn-success">Send</button>
-        </form>
-    <p>Remember your password? <a href="/login">Sign in</a></p>
+    <%= form_with url: user_path(@user), method: :put do |f| %>
+    <div>
+      <%= f.label :password, class: "col-sm-2 col-form-label" %>
+      <%= f.password_field :password, class: "form-control" %>
+      <%= hidden_field_tag 'token', @token  %>
+    </div>
+    <div>
+      <%= f.submit "Confirm", class: "btn btn-success" %>
+    </div>
+  <% end %>
+
 </div>

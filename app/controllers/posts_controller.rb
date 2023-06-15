@@ -24,7 +24,6 @@ class PostsController < ApplicationController
     end
 
     def edit
-        puts(params)
         @post = Post.find(params[:id])
     end
 
