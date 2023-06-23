@@ -1,0 +1,1 @@
+document.querySelector('#<%= @kind %>-post-<%= @post.id %>').textContent = "<%= @kind.capitalize %> <%= @post.reactions.filter {|r| r.kind == @kind}.count %>"
