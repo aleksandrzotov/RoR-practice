@@ -1,7 +1,11 @@
 Rails.application.routes.draw do
   root to: 'posts#index'
 
-  resources :posts, :users
+  resources :posts do
+    resources :reactions, only: %i[create]
+  end
+
+  resources  :users
   namespace :api do
     namespace :v1 do
       resources :posts

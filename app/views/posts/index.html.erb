@@ -14,8 +14,8 @@
           <p class="card-text"><%= post.text.truncate(120) %></p>
           <%= link_to "Read more", post, class: "btn btn-primary" %>
           <% if current_user %>
-            <%= link_to "Like", post.like, class: "btn btn-success" %>
-            <%= link_to "Dislike", post.dislike, class: "btn btn-danger" %>
+            <%= link_to "Like #{post.reactions.filter{|r| r[:kind] == 'like'}.count}", post_reactions_path(post, :kind => 'like'), id: "like-post-#{post.id}",  class: "btn btn-success", "data-remote": "true", "data-method": "post" %>
+          <%= link_to "Dislike #{post.reactions.filter{|r| r[:kind] == 'dislike'}.count}", post_reactions_path(post, :kind => 'dislike'),id: "dislike-post-#{post.id}", class: "btn btn-danger", "data-remote": "true", "data-method": "post" %>
           <% end %>
         </div>
       </div>
