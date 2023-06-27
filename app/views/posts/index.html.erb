@@ -8,6 +8,7 @@
 <h1 class="text-center fs-1">Posts</h1>
 <div class="row">
   <% @posts.each do |post| %>
+          <% if (!post.is_banned && !post.is_archived) %>
     <div class="col-md-4 mb-4">
       <div class="card">
         <div class="card-body">
@@ -15,10 +16,12 @@
           <%= link_to "Read more", post, class: "btn btn-primary" %>
           <% if current_user %>
             <%= link_to "Like #{post.reactions.filter{|r| r[:kind] == 'like'}.count}", post_reactions_path(post, :kind => 'like'), id: "like-post-#{post.id}",  class: "btn btn-success", "data-remote": "true", "data-method": "post" %>
-          <%= link_to "Dislike #{post.reactions.filter{|r| r[:kind] == 'dislike'}.count}", post_reactions_path(post, :kind => 'dislike'),id: "dislike-post-#{post.id}", class: "btn btn-danger", "data-remote": "true", "data-method": "post" %>
-          <% end %>
+          <%= link_to "Dislike #{post.reactions.filter{|r| r[:kind] == 'dislike'}.count}", post_reactions_path(post, :kind => 'dislike'),id: "dislike-post-#{post.id}", class: "btn btn-dark", "data-remote": "true", "data-method": "post" %>
+        <%= link_to "Report #{post.reactions.filter{|r| r[:kind] == 'report'}.count}", post_reactions_path(post, :kind => 'report'),id: "report-post-#{post.id}", class: "btn btn-danger", "data-remote": "true", "data-method": "post" %>
+      <% end %>
         </div>
       </div>
     </div>
+      <% end %>
   <% end %>
 </div>
