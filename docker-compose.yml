@@ -21,10 +21,21 @@ services:
   sidekiq:
     image: ror:latest
     command: bundle exec sidekiq
+    environment:
+      DB_HOST: postgres
+      DB_NAME: postgres
+      DB_USERNAME: postgres
+      DB_PASSWORD: postgres
     volumes:
       - .:/usr/src/app
     depends_on:
       - redis
+
+  clockwork:
+    image: ror:latest
+    command: clockwork clock.rb
+    volumes:
+      - .:/usr/src/app
 
   mailcatcher:
     restart: on-failure
