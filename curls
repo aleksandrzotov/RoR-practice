@@ -1,0 +1,6 @@
+curl -X POST -d '{"email":"user_1@example.com", "password":"qwe"}' -H 'Content-Type: application/json' http://0.0.0.0:9000/api/auth
+
+curl -H 'Authorization: eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoyLCJleHAiOjE2ODk4MjcxMTh9.PU5STjlPfNqkFS4YaslkqlQjhlBN2vHQ0E7m4Q1qpV4'  http://0.0.0.0:9000/api/v1/posts
+
+curl -X POST -d '{"kind":"like", "post_id":"2"}' -H 'Authorization: eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoyLCJleHAiOjE2ODk4MjcxMTh9.PU5STjlPfNqkFS4YaslkqlQjhlBN2vHQ0E7m4Q1qpV4' -H 'Content-Type: application/json' http://0.0.0.0:9000/api/v1/reactions
+
