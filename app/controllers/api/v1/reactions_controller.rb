@@ -3,14 +3,13 @@ class Api::V1::ReactionsController < Api::ApplicationController
   before_action :authorize_request
 
   def create
-    @kind = params[:kind]
-    @post = Post.find(params[:post_id])
-    result = Reaction.create(kind: params[:kind], post: @post, user: @current_user)
-    puts result
-    if result
-      render json: {status: :created}
+    form = Api::V1::Reaction::CreateForm.new(params)
+    reaction = Reaction.create(form.params.merge(user: @current_user))
+
+    if reaction
+      render json: reaction, serializer: ReactionSerializer, status: :created
     else
-      render json: { errors: result.errors.full_messages },
+      render json: { errors: reaction.errors.full_messages },
         status: :unprocessable_entity
     end
   end
